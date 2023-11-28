@@ -14,7 +14,7 @@ Hice un ejercicio básico (¡y desordenado!) para probar esta API. Cuando se abr
 
 Pueden probar el ejemplo [aquí](https://rodrigogalvez.github.io/jsBroadcastAPI/). Se debe abrir dos veces para que sea interesante.
 
-![Captura ejemplo](./2023-11-28 13_21_46-Broadcast API.png)
+![Captura ejemplo](/2023-11-28 13_21_46-Broadcast API.png)
 
 ## Limitaciones y mejoras
 
