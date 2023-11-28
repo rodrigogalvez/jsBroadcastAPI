@@ -6,7 +6,7 @@ Prueba de Broadcast API
 
 ¿Han visto ese vídeo de moda donde se ven particulas rojas y verdes en dos ventanas separadas que se alínean entre sí? Lo pueden ver [aquí](https://twitter.com/_nonfigurativ_/status/1727322594570027343)
 
-Sin ver el código fuente me parece interesante que pudan interactuar ventanas separadas en la misma URL. Esto se pued hacer con la [Broadcast Channel API](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API). Es muy interesante.
+Sin ver el código fuente me parece interesante que pudan interactuar ventanas separadas en la misma URL. Esto se puede hacer con la [Broadcast Channel API](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API). Es muy interesante.
 
 ## Ejemplo
 
