@@ -12,6 +12,10 @@ Sin ver el código fuente me parece interesante que pudan interactuar ventanas s
 
 Hice un ejercicio básico (¡y desordenado!) para probar esta API. Cuando se abre la ventana, el programa le da un ID (un número aleatorio) y se informa al canal. Si se abre una nueva ventana, el programa le da otro ID e informa al canal. Ahora  ambas ventanas se enteran que existen. Al mover las ventanas una "flecha" (==>) se inclina apunando a donde está la ventana con ese ID.
 
+Pueden probar el ejemplo [aquí](https://rodrigogalvez.github.io/jsBroadcastAPI/). Se debe abrir dos veces para que sea interesante.
+
+![Captura ejemplo](./2023-11-28 13_21_46-Broadcast API.png)
+
 ## Limitaciones y mejoras
 
 El código es sencillo y hecho a la rápida. La verdad estoy perdiendo tiempo de trabajar haciendo este ejercicio. Después lo ordenaré.
