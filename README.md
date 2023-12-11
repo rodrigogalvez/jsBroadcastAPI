@@ -10,16 +10,14 @@ Sin ver el código fuente me parece interesante que pudan interactuar ventanas s
 
 ## Ejemplo
 
-Hice un ejercicio básico (¡y desordenado!) para probar esta API. Cuando se abre la ventana, el programa le da un ID (un número aleatorio) y se informa al canal. Si se abre una nueva ventana, el programa le da otro ID e informa al canal. Ahora  ambas ventanas se enteran que existen. Al mover las ventanas una "flecha" (==>) se inclina apunando a donde está la ventana con ese ID.
+Hice un ejercicio básico para probar esta API. Consiste en una aplicación que dibuja círculos que salen al azar desde el centro de la pantalla. Cuando se abre una ventana nueva, la ventana anterior y la nueva se reconocen y se "saludan" informando donde están. Luego los círculos se distribuyen al centro de la distancia entre las dos ventanas. Si se abre una tercera, todas se "saludan" y los círculos se distribuyen en el centro de las tres.
 
-Pueden probar el ejemplo [aquí](https://rodrigogalvez.github.io/jsBroadcastAPI/). Se debe abrir dos veces para que sea interesante.
+Pueden probar el ejemplo [aquí](https://rodrigogalvez.github.io/jsBroadcastAPI/). Se debe abrir dos o más veces para que sea interesante.
 
 ![Captura ejemplo](/BroadcastAPI.png)
 
 ## Limitaciones y mejoras
 
-El código es sencillo y hecho a la rápida. La verdad estoy perdiendo tiempo de trabajar haciendo este ejercicio. Después lo ordenaré.
+Esta es la segunda versión de este programa. La anterior quedó en una carpeta llamada "old".
 
-Utiliza el método *requestAnimationFrame* que es muy eficiente cuando se requiere hacer animaciones, pero a la implementación que hice le falta un poco de inteligencia para evitar tanto refresco. Si abren muchas ventanas puede que el navegador se ponga un poco lento.
-
-En unos días haré algunas mejoras al código y pondré una animación más entretenida.
+El código ya no es tan sencillo. Está más ordenado.

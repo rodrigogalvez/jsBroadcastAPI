@@ -4,111 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Broadcast API</title>
-    <script defer>
-
-        var myData = {
-            ID: Math.random().toString(),
-            active: true,
-            shared: false,
-            screenTop, screenLeft, outerWidth, outerHeight
-        }
-        var sharedData = {};
-        var bc;
-
-        function updateWindowsPosition() {
-            let bcElement = document.getElementById("broadcastedMessage");
-            if (bcElement)
-                bcElement.innerText = JSON.stringify(sharedData, null, 2);
-
-            let myDataElement = document.getElementById("myData");
-            if (myDataElement &&
-                (["screenTop", "screenLeft", "outerWidth", "outerHeight"].some(property => window[property] != myData[property]) ||
-                    !myData.shared)) {
-                Object.assign(myData, { screenTop, screenLeft, outerWidth, outerHeight });
-                myDataElement.innerText = `ID: ${myData.ID} t:${myData.screenTop} l:${myData.screenLeft} w:${myData.outerWidth} h:${myData.outerHeight}`;
-                return true;
-            }
-            return false;
-        }
-
-        function broadcastReceiver(event) {
-            if (event.data.active && !(event.data.ID in sharedData))
-                myData.shared = false;
-
-            sharedData[event.data.ID] = event.data;
-
-            if (!myData.shared) {
-                updateWindowsPosition();
-                broadcastPost();
-            }
-        }
-
-        function animation() {
-            if (updateWindowsPosition())
-                broadcastPost();
-            for (const [key, data] of Object.entries(sharedData)) {
-                if (key != myData.ID) {
-                    updateEntanglement(data);
-                }
-            }
-
-            window.requestAnimationFrame(animation);
-        }
-
-        function updateEntanglement(data) {
-            let element = document.getElementById("arrow"+data.ID);
-            if (element && !data.active) {
-                let div = document.getElementById("div"+data.ID);
-                div.remove();
-                delete sharedData[data.ID];
-                return;
-            } else if (!element && data.active) {
-                let others=document.getElementById("others");
-                let div = document.createElement("div");
-                div.setAttribute("id","div"+data.ID);
-                div.innerText = data.ID;
-                div.appendChild(element = document.createElement("span"));
-                element.setAttribute("id","arrow"+data.ID);
-                element.innerText = "==>";
-                element.style.display="inline-block";
-                others.appendChild(div);
-            }
-            let deltaY = myData.screenTop-data.screenTop;
-            let deltaX = myData.screenLeft-data.screenLeft;
-            let angle = ( deltaX==0?
-                Math.PI/2:
-                Math.atan(deltaY/deltaX) )
-                + (deltaX>0?Math.PI:0);
-            element.style.rotate=angle+"rad";
-        }
-
-        function broadcastPost() {
-            myData.shared = true;
-            sharedData[myData.ID] = myData;
-            bc.postMessage(myData);
-        }
-
-        window.onload = () => {
-            bc = new BroadcastChannel("test_channel");
-            bc.onmessage = broadcastReceiver;
-            window.requestAnimationFrame(animation);
-        }
-
-        window.onunload = () => {
-            if (bc && myData.active) {
-                myData.active = false;
-                broadcastPost();
-            }
-        }
-
-    </script>
+    <title>Document</title>
+    <script src="app.js" type="module"></script>
 </head>
+<style>
+    canvas {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: beige;
+        z-index: -1;
+    }
+</style>
 
 <body>
-    <pre id="myData"></pre>
-    <div id="others"></div>
-    <pre id="broadcastedMessage"></pre>
+    <canvas></canvas>
+    <pre></pre>
 </body>
 
 </html>
