@@ -14,6 +14,8 @@ class Star {
     y;
     dx;
     dy;
+    gx=0;
+    gy=0;
     radius;
     constructor(x, y, dx, dy) {
         this.x = x;
@@ -53,17 +55,17 @@ class Game {
      * @type {Set.<Star>}
      */
     stars;
-    /**
-     * 
-     * @param {Map.<String,Object>} others 
-     */
-    others;
+    // /**
+    //  * 
+    //  * @param {Map.<String,Object>} others 
+    //  */
+    // others;
 
-    constructor(canvas, others) {
+    constructor(canvas, context) {
         this.canvas = canvas;
-        this.context = canvas.getContext("2d");
+        this.context = context;
         this.stars = new Set();
-        this.others = others;
+        // this.others = others;
     }
 
     start() {
@@ -76,23 +78,25 @@ class Game {
         let dx = speed();
         let dy = speed();
 
-        let x = window.screenLeft;
-        let y = window.screenTop;
-        let gx = 0;
-        let gy = 0;
-        let c = 0;
+        // let x = window.screenLeft;
+        // let y = window.screenTop;
+        // let gx = 0;
+        // let gy = 0;
+        // let c = 0;
 
-        this.others.forEach((value, key) => {
-            c++;
-            gx += x - value.x;
-            gy += y - value.y;
-        })
-        if (c > 0) {
-            gx = gx / c;
-            gy = gy / c;
-            dx -= gx / 3;
-            dy -= gy / 3;
-        }
+        // this.others.forEach((value, key) => {
+        //     c++;
+        //     gx += x - value.x;
+        //     gy += y - value.y;
+        // })
+        // if (c > 0) {
+        //     gx = gx / c;
+        //     gy = gy / c;
+        //     dx -= gx / 3;
+        //     dy -= gy / 3;
+        // }
+        dx-=this.gx/3;
+        dy-=this.gy/3;
 
         let star = new Star(this.canvas.width / 2, this.canvas.height / 2, dx, dy);
         this.stars.add(star);

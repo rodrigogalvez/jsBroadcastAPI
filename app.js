@@ -4,23 +4,52 @@ import { enqueue } from "./tools/animation.js";
 import { channel, broadcast } from "./tools/broadcast.js";
 
 let canvas = document.querySelector("canvas");
+let context = canvas.getContext("2d");
 let others = new Map();
-let game = new Game(canvas, others);
+let game = new Game(canvas, context);
 
 function setCanvasSize() {
     let rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width;
-    canvas.height = rect.height;
+    canvas.width = rect.width * window.devicePixelRatio;
+    canvas.height = rect.height * window.devicePixelRatio;
+    context.scale(window.devicePixelRatio, window.devicePixelRatio);
 }
 
-function position() {
+function hello() {
     broadcast({
         hello: {
             soure: me(),
-            x: window.screenLeft,
-            y: window.screenTop
+            x: window.screenLeft + window.outerWidth / 2,
+            y: window.screenTop + window.outerHeight / 2
         }
     })
+}
+
+function updateGravity() {
+
+    let gx = 0;
+    let gy = 0;
+    let c = 0;
+    let x = window.screenLeft + window.outerWidth / 2;
+    let y = window.screenTop + window.outerHeight / 2
+
+
+    others.forEach((value, key) => {
+        c++;
+        gx += x - value.x;
+        gy += y - value.y;
+    })
+    if (c > 0) {
+        gx = gx / c;
+        gy = gy / c;
+        game.gx = gx;
+        game.gy = gy;
+        // dx -= gx / 3;
+        // dy -= gy / 3;
+    } else {
+        game.gx = 0;
+        game.gy = 0;
+    }
 }
 
 function onhello(event) {
@@ -30,20 +59,24 @@ function onhello(event) {
         d.y = event.data.y;
     } else {
         others.set(event.data.soure, { x: event.data.x, y: event.data.y })
-        position();
+        hello();
     }
+    updateGravity();
+
 }
 
 function onbye(event) {
     others.delete(event.data);
+    updateGravity();
 }
 
 function onload() {
-    position();
+    hello();
 }
 
 function onmove() {
-    position();
+    hello();
+    updateGravity();
 }
 
 function onunload() {
@@ -54,6 +87,8 @@ function onunload() {
 
 function onresize() {
     setCanvasSize();
+    hello();
+    updateGravity();
 }
 
 function info(elapsedTime) {
